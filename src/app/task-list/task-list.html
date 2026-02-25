@@ -1,0 +1,20 @@
+<h2 class="text-xl font-semibold text-gray-800 mb-4">{{ title() }}</h2>
+<div class="space-y-3 mb-8">
+  @for (todo of todos(); track todo.id) {
+  <div
+    class="flex items-center justify-between bg-white p-4 rounded-xl shadow-md transition duration-150 border border-gray-100">
+    <label class="flex items-center cursor-pointer grow">
+      <input type="checkbox" [checked]="todo.completed" (change)="toggle(todo)"
+        class="form-checkbox h-5 w-5 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500 mr-4" />
+      <span class="text-gray-700" [innerHTML]="todo.description | sanitizeHtml"></span>
+    </label>
+    <button (click)="delete(todo.id)"
+      class="ml-4 text-sm text-red-500 hover:text-red-700 p-2 rounded hover:bg-red-50 transition duration-150">
+      Delete
+    </button>
+  </div>
+  }
+  @if (todos().length === 0) {
+  <div class="text-center text-gray-500 p-4">No items</div>
+  }
+</div>
